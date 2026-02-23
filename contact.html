@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | KickStyle Karachi</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="search-overlay" id="search-overlay"><div class="search-input-wrap"><i class="fas fa-search"></i><input type="text" id="search-input" placeholder="Search sneakers..."><button class="search-close" onclick="closeSearch()"><i class="fas fa-times"></i></button></div><div class="search-results" id="search-results"></div></div>
+<div class="overlay" id="overlay"></div>
+<div class="auth-modal" id="auth-modal"><div class="auth-modal-header"><h2>Welcome to KickStyle</h2><button class="modal-close" onclick="closeAuthModal()"><i class="fas fa-times"></i></button></div><div class="auth-tabs"><button class="auth-tab active" data-tab="login" onclick="switchAuthTab('login')">Login</button><button class="auth-tab" data-tab="register" onclick="switchAuthTab('register')">Register</button></div><form class="auth-form active" id="login-form"><div class="form-group"><label class="form-label">Email</label><div class="form-control-icon"><i class="fas fa-envelope"></i><input type="email" id="login-email" class="form-control" placeholder="your@email.com" required></div></div><div class="form-group"><label class="form-label">Password</label><div class="form-control-icon"><i class="fas fa-lock"></i><input type="password" id="login-password" class="form-control" placeholder="••••••••" required></div></div><button type="submit" class="btn" style="width:100%;justify-content:center">Login</button></form><form class="auth-form" id="register-form"><div class="form-group"><label class="form-label">Full Name</label><div class="form-control-icon"><i class="fas fa-user"></i><input type="text" id="reg-name" class="form-control" placeholder="Ahmed Khan" required></div></div><div class="form-group"><label class="form-label">Email</label><div class="form-control-icon"><i class="fas fa-envelope"></i><input type="email" id="reg-email" class="form-control" placeholder="your@email.com" required></div></div><div class="form-group"><label class="form-label">Password</label><div class="form-control-icon"><i class="fas fa-lock"></i><input type="password" id="reg-password" class="form-control" placeholder="Min 6 chars" required minlength="6"></div></div><button type="submit" class="btn" style="width:100%;justify-content:center">Create Account</button></form></div>
+<aside class="cart-drawer" id="cart-drawer"><div class="cart-drawer-header"><h3><i class="fas fa-shopping-cart" style="color:var(--primary);margin-right:8px"></i>Your Cart</h3><button class="drawer-close" onclick="closeCart()"><i class="fas fa-times"></i></button></div><div class="cart-items-list" id="cart-items-list"></div><div class="cart-footer"><div class="cart-total-row"><span>Subtotal</span><strong id="cart-total">PKR 0</strong></div><div class="cart-actions"><button class="btn" onclick="proceedToCheckout()" style="justify-content:center"><i class="fas fa-credit-card"></i> Checkout</button><button class="btn btn-whatsapp" onclick="orderViaWhatsApp()"><i class="fab fa-whatsapp"></i> Order via WhatsApp</button></div></div></aside>
+<div class="checkout-modal" id="checkout-modal"><div class="auth-modal-header"><h2 style="color:white">Checkout</h2><button class="modal-close" onclick="closeCheckoutModal()"><i class="fas fa-times"></i></button></div><div id="checkout-summary"></div><p class="checkout-section-title">Shipping</p><form id="checkout-form"><div class="checkout-grid"><div class="form-group"><label class="form-label">First Name</label><input id="co-fname" type="text" class="form-control" required placeholder="Ahmed"></div><div class="form-group"><label class="form-label">Last Name</label><input id="co-lname" type="text" class="form-control" required placeholder="Khan"></div></div><div class="form-group"><label class="form-label">Phone (WhatsApp)</label><input id="co-phone" type="tel" class="form-control" required placeholder="03XX-XXXXXXX"></div><div class="form-group"><label class="form-label">Email</label><input id="co-email" type="email" class="form-control" required></div><div class="form-group"><label class="form-label">Address</label><input id="co-addr" type="text" class="form-control" required></div><div class="checkout-grid"><div class="form-group"><label class="form-label">City</label><input id="co-city" type="text" class="form-control" required placeholder="Karachi"></div><div class="form-group"><label class="form-label">Postal Code</label><input id="co-zip" type="text" class="form-control" required placeholder="75500"></div></div><p class="checkout-section-title">Payment</p><div class="form-group"><label class="form-label">Card Number</label><input type="text" class="form-control" placeholder="4242 4242 4242 4242"></div><div class="checkout-grid"><div class="form-group"><label class="form-label">Expiry</label><input type="text" class="form-control" placeholder="MM/YY"></div><div class="form-group"><label class="form-label">CVV</label><input type="text" class="form-control" placeholder="123"></div></div><button type="submit" class="btn" style="width:100%;justify-content:center;margin-top:1rem"><i class="fab fa-whatsapp"></i> Place Order via WhatsApp</button></form></div>
+
+<nav class="mobile-nav" id="mobile-nav">
+  <a href="index.html" class="mobile-nav-item"><i class="fas fa-home"></i>Home</a>
+  <a href="product.html" class="mobile-nav-item"><i class="fas fa-shoe-prints"></i>Products</a>
+  <a href="service.html" class="mobile-nav-item"><i class="fas fa-concierge-bell"></i>Services</a>
+  <a href="about.html" class="mobile-nav-item"><i class="fas fa-users"></i>About</a>
+  <a href="contact.html" class="mobile-nav-item active"><i class="fas fa-envelope"></i>Contact</a>
+  <div class="mobile-nav-search"><i class="fas fa-search"></i><input type="text" placeholder="Search sneakers..." onclick="closeMobileNav();openSearch();" readonly></div>
+  <div class="mobile-nav-actions"><button class="btn btn-dark" onclick="closeMobileNav();openCart();"><i class="fas fa-shopping-cart"></i> Cart</button><button class="btn" onclick="closeMobileNav();openAuthModal('login');"><i class="fas fa-user"></i> Account</button></div>
+</nav>
+<header>
+  <div class="container">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><i class="fas fa-shoe-prints logo-icon"></i>KickStyle</a>
+      <ul class="nav-links"><li><a href="index.html" class="nav-link">Home</a></li><li><a href="product.html" class="nav-link">Products</a></li><li><a href="service.html" class="nav-link">Services</a></li><li><a href="about.html" class="nav-link">About</a></li><li><a href="contact.html" class="nav-link active">Contact</a></li></ul>
+      <div class="nav-search-wrap"><i class="fas fa-search nav-search-icon"></i><input type="text" class="nav-search-bar" placeholder="Search sneakers..." onfocus="openSearch()" readonly></div>
+      <div class="nav-icons"><button class="nav-icon" onclick="openSearch()"><i class="fas fa-search"></i></button><button class="nav-icon" onclick="openCart()" style="position:relative"><i class="fas fa-shopping-cart"></i><span class="cart-badge" style="display:none">0</span></button><div class="user-icon-wrap"><button class="nav-icon" id="user-icon-btn"><i class="fas fa-user"></i></button><div class="user-dropdown" id="user-dropdown"></div></div></div>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero"><div class="container"><h1 class="page-hero-title">Contact <span>Us</span></h1><div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Contact</span></div></div></div>
+
+<!-- Contact Section -->
+<section style="padding:5rem 0;background:var(--light)">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="section-label">Reach Out</div>
+        <h2 class="about-title" style="margin-bottom:1rem">We'd Love to<br>Hear from You</h2>
+        <p style="color:var(--text-muted);margin-bottom:2rem;font-size:.95rem">Whether you have a question about products, orders, or anything else — our Karachi team is ready to help you.</p>
+
+        <div class="contact-method" onclick="openWhatsApp()" style="cursor:pointer">
+          <div class="contact-method-icon" style="background:rgba(37,211,102,.1);color:#25D366"><i class="fab fa-whatsapp"></i></div>
+          <div><p class="contact-method-title">WhatsApp</p><p class="contact-method-text">03491705092</p><p class="contact-method-action">Chat now → Fastest response</p></div>
+        </div>
+        <div class="contact-method">
+          <div class="contact-method-icon" style="background:rgba(245,158,11,.1);color:var(--primary)"><i class="fas fa-envelope"></i></div>
+          <div><p class="contact-method-title">Email</p><p class="contact-method-text" style="word-break:break-all">ghotoghotki185@gmail.com</p><p class="contact-method-action">Usually replies within 2 hours</p></div>
+        </div>
+        <div class="contact-method">
+          <div class="contact-method-icon" style="background:rgba(59,130,246,.1);color:#3b82f6"><i class="fas fa-phone"></i></div>
+          <div><p class="contact-method-title">Phone</p><p class="contact-method-text">03491705092</p><p class="contact-method-action">Mon–Sat, 10AM–8PM PKT</p></div>
+        </div>
+        <div class="contact-method">
+          <div class="contact-method-icon" style="background:rgba(16,185,129,.1);color:#10b981"><i class="fas fa-map-marker-alt"></i></div>
+          <div><p class="contact-method-title">Address</p><p class="contact-method-text">Karachi, Sindh, Pakistan</p><p class="contact-method-action">Open daily 10AM–8PM</p></div>
+        </div>
+        <div class="contact-method">
+          <div class="contact-method-icon" style="background:rgba(99,102,241,.1);color:#6366f1"><i class="fas fa-rupee-sign"></i></div>
+          <div><p class="contact-method-title">Pricing</p><p class="contact-method-text">All prices in PKR (Pakistani Rupee)</p><p class="contact-method-action">COD · JazzCash · EasyPaisa · Card</p></div>
+        </div>
+
+        <!-- Karachi Map -->
+        <div style="margin-top:1.5rem;border-radius:12px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.1)">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d231879.59099657832!2d66.99009785!3d24.8607622!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33e06651d4bbf%3A0x9cf92f44555a0c23!2sKarachi%2C%20Karachi%20City%2C%20Sindh%2C%20Pakistan!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" width="100%" height="220" style="border:0;display:block" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+
+      <div class="contact-form-card form-light">
+        <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--dark2);margin-bottom:.4rem">Send a Message</h3>
+        <p style="color:var(--text-muted);margin-bottom:2rem;font-size:.9rem">Fill out the form and we'll get back to you within 24 hours. Or WhatsApp us for instant help!</p>
+        <form id="contact-form" onsubmit="handleContactForm(event)">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+            <div class="form-group"><label class="form-label">First Name</label><input type="text" name="name" class="form-control" placeholder="Ahmed" required></div>
+            <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-control" placeholder="Khan" required></div>
+          </div>
+          <div class="form-group"><label class="form-label">Email Address</label><input type="email" name="email" class="form-control" placeholder="you@email.com" required></div>
+          <div class="form-group"><label class="form-label">Phone (WhatsApp)</label><input type="tel" class="form-control" placeholder="03XX-XXXXXXX"></div>
+          <div class="form-group">
+            <label class="form-label">Subject</label>
+            <select name="subject" class="form-control">
+              <option value="">Select a topic</option>
+              <option>Order Inquiry</option>
+              <option>Product Question</option>
+              <option>Returns &amp; Exchanges</option>
+              <option>Delivery Issue</option>
+              <option>Price in PKR</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Your Message</label><textarea name="message" class="form-control" rows="5" placeholder="How can we help you?" required></textarea></div>
+          <div style="display:flex;flex-direction:column;gap:.8rem">
+            <button type="submit" class="btn" style="width:100%;justify-content:center"><i class="fas fa-paper-plane"></i> Send via Email</button>
+            <button type="button" class="btn btn-whatsapp" style="width:100%;justify-content:center" onclick="openWhatsApp('Hi KickStyle! I have a question.')"><i class="fab fa-whatsapp"></i> Message on WhatsApp: 03491705092</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Social Strip -->
+<section class="social-strip">
+  <div class="container">
+    <p style="color:#94a3b8;font-size:.82rem;text-transform:uppercase;letter-spacing:1px">Follow Us &amp; Connect</p>
+    <div class="social-strip-links">
+      <a href="#" class="social-strip-link"><i class="fab fa-instagram" style="font-size:1.1rem"></i> Instagram</a>
+      <a href="#" class="social-strip-link"><i class="fab fa-facebook-f" style="font-size:1.1rem"></i> Facebook</a>
+      <a href="#" class="social-strip-link"><i class="fab fa-twitter" style="font-size:1.1rem"></i> Twitter</a>
+      <a href="https://wa.me/923491705092" target="_blank" class="social-strip-link" style="color:#25D366"><i class="fab fa-whatsapp" style="font-size:1.1rem"></i> WhatsApp: 03491705092</a>
+      <a href="mailto:ghotoghotki185@gmail.com" class="social-strip-link"><i class="fas fa-envelope" style="font-size:1.1rem"></i> Email Us</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><h3 class="footer-title"><i class="fas fa-shoe-prints" style="color:var(--red);margin-right:8px"></i>KickStyle</h3><p class="footer-text">Karachi's premium sneaker store. All prices in PKR.</p><div style="margin-top:1rem;display:flex;flex-direction:column;gap:4px"><a href="https://wa.me/923491705092" style="color:#25D366;font-size:.85rem;text-decoration:none"><i class="fab fa-whatsapp" style="margin-right:6px"></i>03491705092</a><a href="mailto:ghotoghotki185@gmail.com" style="color:var(--primary);font-size:.85rem;text-decoration:none"><i class="fas fa-envelope" style="margin-right:6px"></i>ghotoghotki185@gmail.com</a><span style="color:#94a3b8;font-size:.85rem"><i class="fas fa-map-marker-alt" style="color:#3b82f6;margin-right:6px"></i>Karachi, Pakistan</span></div><div class="social-icons"><a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-icon"><i class="fab fa-instagram"></i></a><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a><a href="https://wa.me/923491705092" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a></div></div>
+      <div><h3 class="footer-title">Quick Links</h3><ul class="footer-links"><li><a href="index.html" class="footer-link">Home</a></li><li><a href="product.html" class="footer-link">Products</a></li><li><a href="service.html" class="footer-link">Services</a></li><li><a href="about.html" class="footer-link">About</a></li><li><a href="contact.html" class="footer-link">Contact</a></li></ul></div>
+      <div><h3 class="footer-title">Support</h3><ul class="footer-links"><li><a href="#" class="footer-link">Size Guide</a></li><li><a href="#" class="footer-link">Returns</a></li><li><a href="#" class="footer-link">Shipping Info</a></li><li><a href="#" class="footer-link">Privacy Policy</a></li></ul></div>
+      <div><h3 class="footer-title">Newsletter</h3><p class="footer-text" style="margin-bottom:1rem">Get latest updates and PKR deals.</p><div class="newsletter-form"><input type="email" id="nl-email" class="newsletter-input" placeholder="your@email.com"><button class="btn btn-sm" onclick="handleNewsletter('nl-email')">Subscribe</button></div></div>
+    </div>
+    <div class="copyright"><p>&copy; 2025 KickStyle Karachi. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<div class="whatsapp-float" onclick="openWhatsApp()"><i class="fab fa-whatsapp"></i><span class="whatsapp-tooltip">Chat: 03491705092</span></div>
+<div id="toast-container"></div>
+<script src="script.js"></script>
+</body>
+</html>

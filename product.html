@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products | KickStyle Karachi</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="search-overlay" id="search-overlay"><div class="search-input-wrap"><i class="fas fa-search"></i><input type="text" id="search-input" placeholder="Search sneakers, brands..."><button class="search-close" onclick="closeSearch()"><i class="fas fa-times"></i></button></div><div class="search-results" id="search-results"></div></div>
+<div class="overlay" id="overlay"></div>
+<div class="auth-modal" id="auth-modal"><div class="auth-modal-header"><h2>Welcome to KickStyle</h2><button class="modal-close" onclick="closeAuthModal()"><i class="fas fa-times"></i></button></div><div class="auth-tabs"><button class="auth-tab active" data-tab="login" onclick="switchAuthTab('login')">Login</button><button class="auth-tab" data-tab="register" onclick="switchAuthTab('register')">Register</button></div><form class="auth-form active" id="login-form"><div class="form-group"><label class="form-label">Email</label><div class="form-control-icon"><i class="fas fa-envelope"></i><input type="email" id="login-email" class="form-control" placeholder="your@email.com" required></div></div><div class="form-group"><label class="form-label">Password</label><div class="form-control-icon"><i class="fas fa-lock"></i><input type="password" id="login-password" class="form-control" placeholder="••••••••" required></div></div><button type="submit" class="btn" style="width:100%;justify-content:center">Login</button></form><form class="auth-form" id="register-form"><div class="form-group"><label class="form-label">Full Name</label><div class="form-control-icon"><i class="fas fa-user"></i><input type="text" id="reg-name" class="form-control" placeholder="Ahmed Khan" required></div></div><div class="form-group"><label class="form-label">Email</label><div class="form-control-icon"><i class="fas fa-envelope"></i><input type="email" id="reg-email" class="form-control" placeholder="your@email.com" required></div></div><div class="form-group"><label class="form-label">Password</label><div class="form-control-icon"><i class="fas fa-lock"></i><input type="password" id="reg-password" class="form-control" placeholder="Min 6 chars" required minlength="6"></div></div><button type="submit" class="btn" style="width:100%;justify-content:center">Create Account</button></form></div>
+<aside class="cart-drawer" id="cart-drawer"><div class="cart-drawer-header"><h3><i class="fas fa-shopping-cart" style="color:var(--primary);margin-right:8px"></i>Your Cart</h3><button class="drawer-close" onclick="closeCart()"><i class="fas fa-times"></i></button></div><div class="cart-items-list" id="cart-items-list"></div><div class="cart-footer"><div class="cart-total-row"><span>Subtotal</span><strong id="cart-total">PKR 0</strong></div><div class="cart-actions"><button class="btn" onclick="proceedToCheckout()" style="justify-content:center"><i class="fas fa-credit-card"></i> Checkout</button><button class="btn btn-whatsapp" onclick="orderViaWhatsApp()"><i class="fab fa-whatsapp"></i> Order via WhatsApp</button></div></div></aside>
+<div class="checkout-modal" id="checkout-modal"><div class="auth-modal-header"><h2 style="color:white">Checkout</h2><button class="modal-close" onclick="closeCheckoutModal()"><i class="fas fa-times"></i></button></div><div id="checkout-summary"></div><p class="checkout-section-title">Shipping Information</p><form id="checkout-form"><div class="checkout-grid"><div class="form-group"><label class="form-label">First Name</label><input id="co-fname" type="text" class="form-control" required placeholder="Ahmed"></div><div class="form-group"><label class="form-label">Last Name</label><input id="co-lname" type="text" class="form-control" required placeholder="Khan"></div></div><div class="form-group"><label class="form-label">Phone (WhatsApp)</label><input id="co-phone" type="tel" class="form-control" required placeholder="03XX-XXXXXXX"></div><div class="form-group"><label class="form-label">Email</label><input id="co-email" type="email" class="form-control" required></div><div class="form-group"><label class="form-label">Address</label><input id="co-addr" type="text" class="form-control" required placeholder="House, Street, Area"></div><div class="checkout-grid"><div class="form-group"><label class="form-label">City</label><input id="co-city" type="text" class="form-control" required placeholder="Karachi"></div><div class="form-group"><label class="form-label">Postal Code</label><input id="co-zip" type="text" class="form-control" required placeholder="75500"></div></div><p class="checkout-section-title">Payment</p><div class="form-group"><label class="form-label">Card Number</label><input type="text" class="form-control" placeholder="4242 4242 4242 4242"></div><div class="checkout-grid"><div class="form-group"><label class="form-label">Expiry</label><input type="text" class="form-control" placeholder="MM/YY"></div><div class="form-group"><label class="form-label">CVV</label><input type="text" class="form-control" placeholder="123"></div></div><button type="submit" class="btn" style="width:100%;justify-content:center;margin-top:1rem"><i class="fab fa-whatsapp"></i> Place Order via WhatsApp</button></form></div>
+
+<nav class="mobile-nav" id="mobile-nav">
+  <a href="index.html" class="mobile-nav-item"><i class="fas fa-home"></i>Home</a>
+  <a href="product.html" class="mobile-nav-item active"><i class="fas fa-shoe-prints"></i>Products</a>
+  <a href="service.html" class="mobile-nav-item"><i class="fas fa-concierge-bell"></i>Services</a>
+  <a href="about.html" class="mobile-nav-item"><i class="fas fa-users"></i>About</a>
+  <a href="contact.html" class="mobile-nav-item"><i class="fas fa-envelope"></i>Contact</a>
+  <div class="mobile-nav-search"><i class="fas fa-search"></i><input type="text" placeholder="Search sneakers..." onclick="closeMobileNav();openSearch();" readonly></div>
+  <div class="mobile-nav-actions"><button class="btn btn-dark" onclick="closeMobileNav();openCart();"><i class="fas fa-shopping-cart"></i> Cart</button><button class="btn" onclick="closeMobileNav();openAuthModal('login');"><i class="fas fa-user"></i> Account</button></div>
+</nav>
+<header>
+  <div class="container">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><i class="fas fa-shoe-prints logo-icon"></i>KickStyle</a>
+      <ul class="nav-links"><li><a href="index.html" class="nav-link">Home</a></li><li><a href="product.html" class="nav-link active">Products</a></li><li><a href="service.html" class="nav-link">Services</a></li><li><a href="about.html" class="nav-link">About</a></li><li><a href="contact.html" class="nav-link">Contact</a></li></ul>
+      <div class="nav-search-wrap"><i class="fas fa-search nav-search-icon"></i><input type="text" class="nav-search-bar" placeholder="Search sneakers..." onfocus="openSearch()" readonly></div>
+      <div class="nav-icons"><button class="nav-icon" onclick="openSearch()"><i class="fas fa-search"></i></button><button class="nav-icon" onclick="openCart()" style="position:relative"><i class="fas fa-shopping-cart"></i><span class="cart-badge" style="display:none">0</span></button><div class="user-icon-wrap"><button class="nav-icon" id="user-icon-btn"><i class="fas fa-user"></i></button><div class="user-dropdown" id="user-dropdown"></div></div></div>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero"><div class="container"><h1 class="page-hero-title">Our <span>Products</span></h1><div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Products</span></div></div></div>
+
+<!-- PKR Notice Bar -->
+<div style="background:rgba(245,158,11,.1);border-bottom:1px solid rgba(245,158,11,.2);padding:.7rem 0;text-align:center">
+  <p style="color:var(--primary);font-size:.88rem;font-weight:600"><i class="fas fa-tag" style="margin-right:6px"></i>All prices in PKR (Pakistani Rupee) · Delivery across Pakistan · Order via WhatsApp: <a href="https://wa.me/923491705092" style="color:var(--primary)">03491705092</a></p>
+</div>
+
+<section style="padding:4rem 0">
+  <div class="container">
+    <button class="btn btn-outline filter-mobile-toggle" onclick="toggleSidebar()" style="margin-bottom:1.5rem;color:var(--text);border-color:var(--border)"><i class="fas fa-sliders-h"></i> Filters</button>
+    <div class="products-layout">
+      <aside class="products-sidebar">
+        <div class="sidebar-filters" id="sidebar-filters">
+          <div class="filter-card">
+            <p class="filter-card-title"><i class="fas fa-tag"></i> Category</p>
+            <label class="filter-option"><input type="checkbox" id="f-all" checked onchange="filterByCheckbox()"> <label for="f-all">All Categories</label></label>
+            <label class="filter-option"><input type="checkbox" id="f-running" onchange="filterByCheckbox()"> <label for="f-running">Running</label></label>
+            <label class="filter-option"><input type="checkbox" id="f-basketball" onchange="filterByCheckbox()"> <label for="f-basketball">Basketball</label></label>
+            <label class="filter-option"><input type="checkbox" id="f-lifestyle" onchange="filterByCheckbox()"> <label for="f-lifestyle">Lifestyle</label></label>
+          </div>
+          <div class="filter-card">
+            <p class="filter-card-title"><i class="fas fa-building"></i> Brand</p>
+            <label class="filter-option"><input type="checkbox" data-brand="nike" onchange="filterByBrand()"> <label>Nike</label></label>
+            <label class="filter-option"><input type="checkbox" data-brand="adidas" onchange="filterByBrand()"> <label>Adidas</label></label>
+            <label class="filter-option"><input type="checkbox" data-brand="jordan" onchange="filterByBrand()"> <label>Jordan</label></label>
+            <label class="filter-option"><input type="checkbox" data-brand="puma" onchange="filterByBrand()"> <label>Puma</label></label>
+            <label class="filter-option"><input type="checkbox" data-brand="new balance" onchange="filterByBrand()"> <label>New Balance</label></label>
+            <label class="filter-option"><input type="checkbox" data-brand="converse" onchange="filterByBrand()"> <label>Converse</label></label>
+            <label class="filter-option"><input type="checkbox" data-brand="vans" onchange="filterByBrand()"> <label>Vans</label></label>
+            <label class="filter-option"><input type="checkbox" data-brand="reebok" onchange="filterByBrand()"> <label>Reebok</label></label>
+          </div>
+          <div class="filter-card">
+            <p class="filter-card-title"><i class="fas fa-rupee-sign"></i> Max Price (PKR)</p>
+            <input type="range" class="price-range" id="price-range" min="10000" max="70000" value="70000" step="1000" oninput="filterByPrice(this.value)">
+            <div class="price-display"><span>PKR 10,000</span><span id="price-max">PKR 70,000</span></div>
+          </div>
+          <div class="filter-card">
+            <p class="filter-card-title"><i class="fas fa-star"></i> Min Rating</p>
+            <label class="filter-option"><input type="radio" name="rating" value="0" id="r-any" checked> <label for="r-any">Any Rating</label></label>
+            <label class="filter-option"><input type="radio" name="rating" value="4"> <label>4★ & above</label></label>
+            <label class="filter-option"><input type="radio" name="rating" value="4.5"> <label>4.5★ & above</label></label>
+          </div>
+          <button class="btn btn-outline" onclick="resetFilters()" style="width:100%;justify-content:center;color:var(--text);border-color:var(--border)"><i class="fas fa-undo"></i> Reset Filters</button>
+        </div>
+      </aside>
+      <div>
+        <div class="products-header">
+          <p class="products-count" id="products-count">Showing 12 products</p>
+          <select class="form-control" style="width:auto;padding:8px 12px" onchange="sortProducts(this.value)">
+            <option value="">Sort By</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+          </select>
+        </div>
+        <div class="products-grid" id="products-grid"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WhatsApp CTA -->
+<section style="background:var(--dark2);padding:3rem 0;text-align:center">
+  <div class="container">
+    <h3 style="color:white;font-family:'Bebas Neue',sans-serif;font-size:2rem;margin-bottom:.5rem">Can't find what you're looking for?</h3>
+    <p style="color:#94a3b8;margin-bottom:1.5rem">Message us on WhatsApp — we'll find your perfect pair!</p>
+    <button class="btn btn-whatsapp" onclick="openWhatsApp('Hi! I am looking for a specific sneaker. Can you help me?')" style="font-size:1.1rem;padding:14px 32px"><i class="fab fa-whatsapp"></i> WhatsApp: 03491705092</button>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><h3 class="footer-title"><i class="fas fa-shoe-prints" style="color:var(--red);margin-right:8px"></i>KickStyle</h3><p class="footer-text">Karachi's premium sneaker store. All prices in PKR.</p><div style="margin-top:1rem;display:flex;flex-direction:column;gap:4px"><a href="https://wa.me/923491705092" style="color:#25D366;font-size:.85rem;text-decoration:none"><i class="fab fa-whatsapp" style="margin-right:6px"></i>03491705092</a><a href="mailto:ghotoghotki185@gmail.com" style="color:var(--primary);font-size:.85rem;text-decoration:none"><i class="fas fa-envelope" style="margin-right:6px"></i>ghotoghotki185@gmail.com</a><span style="color:#94a3b8;font-size:.85rem"><i class="fas fa-map-marker-alt" style="color:#3b82f6;margin-right:6px"></i>Karachi, Pakistan</span></div><div class="social-icons"><a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-icon"><i class="fab fa-instagram"></i></a><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a><a href="https://wa.me/923491705092" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a></div></div>
+      <div><h3 class="footer-title">Quick Links</h3><ul class="footer-links"><li><a href="index.html" class="footer-link">Home</a></li><li><a href="product.html" class="footer-link">Products</a></li><li><a href="service.html" class="footer-link">Services</a></li><li><a href="about.html" class="footer-link">About Us</a></li><li><a href="contact.html" class="footer-link">Contact</a></li></ul></div>
+      <div><h3 class="footer-title">Support</h3><ul class="footer-links"><li><a href="#" class="footer-link">Size Guide</a></li><li><a href="#" class="footer-link">Returns</a></li><li><a href="#" class="footer-link">Shipping</a></li><li><a href="#" class="footer-link">FAQ</a></li></ul></div>
+      <div><h3 class="footer-title">Newsletter</h3><p class="footer-text" style="margin-bottom:1rem">Get updates on new arrivals.</p><div class="newsletter-form"><input type="email" id="nl-email" class="newsletter-input" placeholder="your@email.com"><button class="btn btn-sm" onclick="handleNewsletter('nl-email')">Subscribe</button></div></div>
+    </div>
+    <div class="copyright"><p>&copy; 2025 KickStyle Karachi. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<div class="whatsapp-float" onclick="openWhatsApp()"><i class="fab fa-whatsapp"></i><span class="whatsapp-tooltip">Chat: 03491705092</span></div>
+<div id="toast-container"></div>
+<script src="script.js"></script>
+<script>
+let _maxPrice=70000, _minRating=0, _activeBrands=[];
+function stars(r){return [1,2,3,4,5].map(i=>i<=Math.floor(r)?'<i class="fas fa-star"></i>':i-r<1?'<i class="fas fa-star-half-alt"></i>':'<i class="far fa-star"></i>').join('');}
+function badge(p){if(['p1','p5','p9'].includes(p.id))return '<span class="product-badge hot">HOT</span>';if(['p2','p6','p11'].includes(p.id))return '<span class="product-badge new">NEW</span>';if(['p4','p12'].includes(p.id))return '<span class="product-badge sale">SALE</span>';return '';}
+function renderProductCard(p){return `<div class="product-card" data-category="${p.category}" data-price="${p.price}" data-rating="${p.rating}" data-brand="${p.brand.toLowerCase()}">${badge(p)}<div class="product-img-wrap"><img src="${p.img}" alt="${p.name}" loading="lazy"></div><div class="product-info"><p class="product-brand">${p.brand}</p><h3 class="product-title">${p.name}</h3><div class="product-rating">${stars(p.rating)} <span>(${p.rating})</span></div><div class="product-size-picker">${['US 7','US 8','US 9','US 10','US 11','US 12'].map(s=>`<button class="size-btn" onclick="selectSize(this,'${p.id}')">${s}</button>`).join('')}</div><div class="product-footer"><p class="product-price">${formatPKR(p.price)}</p><button class="add-cart-btn" data-add-to-cart="${p.id}" data-size="US 10"><i class="fas fa-cart-plus"></i> Add</button></div></div></div>`;}
+function selectSize(btn,id){btn.closest('.product-card').querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');btn.closest('.product-card').querySelector('[data-add-to-cart]').dataset.size=btn.textContent;}
+function renderAll(){const grid=document.getElementById('products-grid');grid.innerHTML=PRODUCTS.map(renderProductCard).join('');bindCartButtons();updateCount();}
+function updateCount(){const v=document.querySelectorAll('#products-grid .product-card:not([style*="none"])').length;document.getElementById('products-count').textContent=`Showing ${v} product${v!==1?'s':''}`;}
+function applyFilters(){document.querySelectorAll('#products-grid .product-card').forEach(card=>{const p=+card.dataset.price,r=+card.dataset.rating,b=card.dataset.brand,cat=card.dataset.category;const catOk=!(document.getElementById('f-running').checked||document.getElementById('f-basketball').checked||document.getElementById('f-lifestyle').checked)||(document.getElementById('f-running').checked&&cat==='running')||(document.getElementById('f-basketball').checked&&cat==='basketball')||(document.getElementById('f-lifestyle').checked&&cat==='lifestyle');const bOk=!_activeBrands.length||_activeBrands.some(x=>b.includes(x));card.style.display=catOk&&bOk&&p<=_maxPrice&&r>=_minRating?'':'none';});updateCount();}
+function filterByCheckbox(){if(document.getElementById('f-all').checked){['f-running','f-basketball','f-lifestyle'].forEach(id=>document.getElementById(id).checked=false);}applyFilters();}
+function filterByBrand(){_activeBrands=Array.from(document.querySelectorAll('[data-brand]:checked')).map(e=>e.dataset.brand);applyFilters();}
+function filterByPrice(v){_maxPrice=+v;document.getElementById('price-max').textContent=`PKR ${Number(v).toLocaleString()}`;applyFilters();}
+function sortProducts(v){const cards=Array.from(document.querySelectorAll('#products-grid .product-card'));cards.sort((a,b)=>{if(v==='price-asc')return +a.dataset.price - +b.dataset.price;if(v==='price-desc')return +b.dataset.price - +a.dataset.price;if(v==='rating')return +b.dataset.rating - +a.dataset.rating;return 0;});const g=document.getElementById('products-grid');cards.forEach(c=>g.appendChild(c));}
+function resetFilters(){['f-all','f-running','f-basketball','f-lifestyle'].forEach(id=>document.getElementById(id).checked=id==='f-all');document.querySelectorAll('[data-brand]').forEach(e=>e.checked=false);document.getElementById('price-range').value=70000;document.getElementById('price-max').textContent='PKR 70,000';document.getElementById('r-any').checked=true;_maxPrice=70000;_minRating=0;_activeBrands=[];applyFilters();}
+function toggleSidebar(){document.getElementById('sidebar-filters')?.classList.toggle('show');}
+document.addEventListener('change',e=>{if(e.target.name==='rating'){_minRating=+e.target.value;applyFilters();}});
+document.addEventListener('DOMContentLoaded',renderAll);
+</script>
+</body>
+</html>
